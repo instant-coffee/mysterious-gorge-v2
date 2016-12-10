@@ -19,14 +19,14 @@ MessagePage.propTypes = {
 
 function getMessageById(messages, id) {
   let message = messages.find(message => message.id == id);
-  return Object.assign({}, message);
+  return Object.assign({}, message);  
 }
 
 function mapStateToProps(state, ownProps) {
 	let message = {text: '', url: '', time: ''};
   const messageId = ownProps.params.id;
   if (state.messages.length > 0){
-    message = getMessageById(state.messages, ownProps.params.id);
+    message = getMessageById(state.messages, ownProps.params.id)
   }
   return {message: message};
 }

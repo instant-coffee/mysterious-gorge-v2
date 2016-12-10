@@ -1,14 +1,21 @@
 import React, {PropTypes} from 'react';
+import MessageListRow from './MessageListRow';
+
 
 const MessageList = ({messages}) => { 
   return (
-      <ul className="list-group">
-        {messages.map(message => 
-          <li className="list-group-item" key={message.id}>
-            {message.text}
-          </li>
-        )}
-      </ul>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Text</th>
+          </tr>
+        </thead>
+        <tbody>
+          {messages.map(message => 
+            <MessageListRow key={message.id} message={message} />
+          )}
+        </tbody>
+    </table>
   );
 };
 
