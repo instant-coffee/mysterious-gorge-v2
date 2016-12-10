@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-const MessageList = ({messages}) => {  
+const MessageList = ({messages}) => { 
   return (
       <ul className="list-group">
         {messages.map(message => 

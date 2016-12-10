@@ -5,7 +5,7 @@ export function loadMessages() {
 	// make async call to api, handle promise, dispatch action when promise is resolved  
   return function(dispatch) {
     return mysteriousGorgeApi.getAllMessages().then(messages => {
-      dispatch(loadMessagesSuccess(messages));
+      dispatch(loadMessagesSuccess(messages.results));
     }).catch(error => {
       throw(error);
     });
