@@ -3,9 +3,6 @@
   "env": {
     "development": {
       "presets": ["react-hmre"]
-    },
-    "production": {
-      "presets": ["react", "es2015"]
     }
   }
 }

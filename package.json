@@ -1,18 +1,20 @@
-{  
+{
   "name": "mysterious-gorge",
   "version": "2.0.0",
   "description": "simple Redux app",
   "main": "index.js",
   "scripts": {
     "test": "test",
+    "prestart": "babel-node tools/startUpMessage.js",
     "start": "npm-run-all --parallel open:src lint:watch",
-    "open:src": "babel-node tools/server.js",
-    "lint": "node_modules/.bin/esw webpack.config.* src utils",
+    "open:src": "babel-node tools/srcServer.js",
+    "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
     "react": "^15.3.1",
+    "react-dom": "^15.4.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
     "redux": "^3.5.2",

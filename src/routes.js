@@ -7,7 +7,8 @@ import MessagePage from './components/messages/MessagePage';
 
 export default (  
   <Route path="/" component={App}>
-    <IndexRoute component={HomePage} />
-    <Route path="/messages" component={MessagesPage} />
+    <IndexRoute component={HomePage}/>
+    <Route path="/messages" component={MessagesPage}/>
+    	<Route path="/messages/:id" component={MessagePage}/>
   </Route>
 );

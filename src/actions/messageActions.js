@@ -1,7 +1,8 @@
-import * as types from './actionTypes'
-import mysteriousGorgeApi from '../api/mysteriousGorgeApi';
+import * as types from './actionTypes';
+import mysteriousGorgeApi from '../api/MysteriousGorgeApi';
 
-export function loadMessages() {  
+export function loadMessages() {
+	// make async call to api, handle promise, dispatch action when promise is resolved  
   return function(dispatch) {
     return mysteriousGorgeApi.getAllMessages().then(messages => {
       dispatch(loadMessagesSuccess(messages));
