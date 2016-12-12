@@ -5,7 +5,7 @@ import * as messageActions from '../../actions/messageActions';
 
 let date, time = new Date().toLocaleString('en-CA').split(', ');  
 
-class MessagePage extends React.Component {  
+class MessagePage extends React.Component {
   render() {
     let messageTS = this.props.message.created_at;
     
@@ -13,6 +13,11 @@ class MessagePage extends React.Component {
       <div className="col-md-8 col-md-offset-2">
         <h1>{this.props.message.text}</h1>
         <h4>{moment(messageTS).format('MMMM Do YYYY, h:mm:ss a')}</h4>
+        <button 
+           onClick={this.deleteMessage} 
+           className="btn btn-sm btn-danger">
+           delete
+        </button>
       </div>
     );
   }

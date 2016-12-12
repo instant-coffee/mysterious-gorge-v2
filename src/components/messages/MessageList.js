@@ -1,7 +1,5 @@
 import React, {PropTypes} from 'react';
 import MessageListRow from './MessageListRow';
-import MessageListDate from './MessageListDate';
-
 
 const MessageList = ({messages}) => { 
   return (
