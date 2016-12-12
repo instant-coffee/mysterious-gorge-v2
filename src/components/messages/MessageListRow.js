@@ -1,11 +1,13 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import moment from 'moment';
 import MessagePage from './MessagePage';
 
 const MessageListRow = ({message}) => {
+	let messageDate = moment(message.created_at); 
   return (
     <tr>
-      <td><Link to={'/messages/' + message.id}>{message.text}</Link></td>
+      <td><Link to={'/messages/' + message.id}>{messageDate.format('MMM do')}  -  {message.text}</Link></td>
     </tr>
   );
 };

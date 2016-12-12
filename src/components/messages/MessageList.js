@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import MessageListRow from './MessageListRow';
+import MessageListDate from './MessageListDate';
 
 
 const MessageList = ({messages}) => { 
@@ -7,12 +8,12 @@ const MessageList = ({messages}) => {
       <table className="table">
         <thead>
           <tr>
-            <th>Text</th>
+            <th>Mystrious Gorge messages list</th>
           </tr>
         </thead>
         <tbody>
           {messages.map(message => 
-            <MessageListRow key={message.id} message={message} />
+              <MessageListRow key={message.id} message={message} />
           )}
         </tbody>
     </table>
