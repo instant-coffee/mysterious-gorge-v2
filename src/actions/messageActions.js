@@ -24,7 +24,7 @@ export function loadMessages() {
   };
 }
 
-export function createCat(message) {
+export function createMessage(message) {
   return function (dispatch) {
     return mysteriousGorgeApi.createmessage(message).then(responseMessage => {
       dispatch(createMessageSuccess(responseMessage));
