@@ -9,7 +9,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage}/>
     <Route path="/messages" component={MessagesPage}>
-    	<Route path="/messages/:id" component={MessagePage}/>
+			<Route path="/messages/:id" component={MessagePage}/>
     </Route>	
   </Route>
 );
