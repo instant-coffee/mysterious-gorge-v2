@@ -31,7 +31,7 @@ class MessagePage extends React.Component {
     return this.setState({message: message});
   }
 
-  componentWillRecieveProps(nextProps){
+  componentToUpdateProps(nextProps){
     if (this.props.message.id != nextProps.messages.id) {
       this.setState({message: nextProps.message});
     }
