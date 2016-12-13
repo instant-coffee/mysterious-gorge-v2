@@ -29,7 +29,7 @@ class MessagesPage extends React.Component {
 }
 
 MessagesPage.propTypes = {
-	messsages: PropTypes.array.isRequired,
+	messages: PropTypes.array.isRequired,
   children: PropTypes.object
 };
 
