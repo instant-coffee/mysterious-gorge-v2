@@ -1,17 +1,35 @@
 import React, {PropTypes} from 'react'; 
-import moment from 'moment'; 
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import moment from 'moment'; 
 import * as messageActions from '../../actions/messageActions';
+import {browserHistory} from 'react-router';
 
-let date, time = new Date().toLocaleString('en-CA').split(', ');  
 
 class MessagePage extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      message: Object.assign({}, this.props.message),
+      saving: false
+    };
+    // this.saveMessage = this.saveMessage.bind(this);
+    // this.updateMessageState = this.updateMessageState.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
+  }
+
+
+  deleteMessage(event) {
+    this.props.actions.deleteMessage(this.state.message);
+  }
+  
   render() {
-    let messageTS = this.props.message.created_at;
     
+    let messageTS = this.state.message.created_at;
+
     return(
       <div className="col-md-8 col-md-offset-2">
-        <h1>{this.props.message.text}</h1>
+        <h1>{this.state.message.text}</h1>
         <h4>{moment(messageTS).format('MMMM Do YYYY, h:mm:ss a')}</h4>
         <button 
            onClick={this.deleteMessage} 
@@ -24,7 +42,8 @@ class MessagePage extends React.Component {
 }
 
 MessagePage.propTypes = {
-  message: PropTypes.object.isRequired
+  message: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 function getMessageById(messages, id) {
@@ -33,12 +52,18 @@ function getMessageById(messages, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-	let message = {text: '', url: '', time: ''};
+	let message = {text: '', url: '', created_at: '', id: ''};
   const messageId = ownProps.params.id;
-  if (state.messages.length > 0){
+  if (message.id && state.messages.length > 0) {
     message = getMessageById(state.messages, ownProps.params.id);
   }
   return {message: message};
 }
 
-export default connect(mapStateToProps)(MessagePage); 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(messageActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessagePage); 

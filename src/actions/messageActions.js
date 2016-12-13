@@ -1,6 +1,14 @@
 import * as types from './actionTypes';
 import mysteriousGorgeApi from '../api/MysteriousGorgeApi';
 
+export function loadMessagesSuccess(messages) {  
+  return {type: types.LOAD_MESSAGES_SUCCESS, messages};
+}
+
+export function deleteMessageSuccess(message) {  
+  return {type: types.DELETE_MESSAGE_SUCCESS, message}
+}
+
 export function loadMessages() {
 	// make async call to api, handle promise, dispatch action when promise is resolved  
   return function(dispatch) {
@@ -12,6 +20,14 @@ export function loadMessages() {
   };
 }
 
-export function loadMessagesSuccess(messages) {  
-  return {type: types.LOAD_MESSAGES_SUCCESS, messages};
+export function deleteMessage(message) {  
+  return function(dispatch) {
+    return mysteriousGorgeApi.deleteMessage(message).then(() => {
+      console.log(`Deleted ${message.id}`)
+      dispatch(deleteMessageSuccess(message));
+      return;
+    }).catch(error => {
+      throw(error);
+    })
+  }
 }
