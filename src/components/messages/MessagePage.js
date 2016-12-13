@@ -13,24 +13,41 @@ class MessagePage extends React.Component {
       message: Object.assign({}, this.props.message),
       saving: false
     };
-    // this.saveMessage = this.saveMessage.bind(this);
-    // this.updateMessageState = this.updateMessageState.bind(this);
+    this.saveMessage = this.saveMessage.bind(this);
+    this.updateMessageState = this.updateMessageState.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
   }
 
+  saveMessage(event) {
+    event.preventDefault();
+    this.setState({saving: true});
+    this.props.actions.newMessage(this.state.message);
+  }
+
+  updateMessageState(event) {
+    const field = event.target.name;
+    const message = this.state.message;
+    message[field] = event.target.value;
+    return this.setState({message: message});
+  }
+
+  componentWillRecieveProps(nextProps){
+    if (this.props.message.id != nextProps.messages.id) {
+      this.setState({message: nextProps.message});
+    }
+    this.setState({saving: false});
+  }
 
   deleteMessage(event) {
     this.props.actions.deleteMessage(this.state.message);
   }
-  
-  render() {
-    
-    let messageTS = this.state.message.created_at;
 
+  render() {
+  
     return(
       <div className="col-md-8 col-md-offset-2">
         <h1>{this.state.message.text}</h1>
-        <h4>{moment(messageTS).format('MMMM Do YYYY, h:mm:ss a')}</h4>
+        <h4>{moment(this.state.message.created_at).format('MMMM Do YYYY, h:mm:ss a')}</h4>
         <button 
            onClick={this.deleteMessage} 
            className="btn btn-sm btn-danger">
@@ -54,7 +71,7 @@ function getMessageById(messages, id) {
 function mapStateToProps(state, ownProps) {
 	let message = {text: '', url: '', created_at: '', id: ''};
   const messageId = ownProps.params.id;
-  if (message.id && state.messages.length > 0) {
+  if (messageId && state.messages.length > 0) {
     message = getMessageById(state.messages, ownProps.params.id);
   }
   return {message: message};

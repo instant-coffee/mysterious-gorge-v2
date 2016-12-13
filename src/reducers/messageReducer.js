@@ -8,6 +8,13 @@ export default function messageReducer(state = initialState.messages, action) {
     // return new message collection
       return action.messages;
 
+    case types.CREATE_MESSAGE_SUCCESS:
+      browserHistory.push(`/message/${action.message.id}`)
+      return [
+        ...state.filter(message => message.id !== action.message.id),
+        Object.assign({}, action.message)
+      ]
+        
     case types.DELETE_MESSAGE_SUCCESS: {
       const newState = Object.assign([], state);
       const indexOfMessageToDelete = state.findIndex(message => {

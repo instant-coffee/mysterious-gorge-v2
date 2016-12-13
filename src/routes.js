@@ -4,11 +4,13 @@ import App from './components/App';
 import HomePage from './components/home/HomePage';  
 import MessagesPage from './components/messages/MessagesPage';  
 import MessagePage from './components/messages/MessagePage';
+import NewMessagePage from './components/messages/NewMessagePage';
 
 export default (  
   <Route path="/" component={App}>
     <IndexRoute component={HomePage}/>
     <Route path="/messages" component={MessagesPage}>
+    	<Route path="/messages/new" component={NewMessagePage} />
 			<Route path="/messages/:id" component={MessagePage}/>
     </Route>	
   </Route>

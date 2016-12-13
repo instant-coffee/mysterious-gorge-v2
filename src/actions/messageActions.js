@@ -5,8 +5,12 @@ export function loadMessagesSuccess(messages) {
   return {type: types.LOAD_MESSAGES_SUCCESS, messages};
 }
 
+export function createMessageSuccess(message) {
+  return {type: types.CREATE_MESSAGE_SUCCESS, message};
+}
+
 export function deleteMessageSuccess(message) {  
-  return {type: types.DELETE_MESSAGE_SUCCESS, message}
+  return {type: types.DELETE_MESSAGE_SUCCESS, message};
 }
 
 export function loadMessages() {
@@ -20,14 +24,26 @@ export function loadMessages() {
   };
 }
 
+export function createCat(message) {
+  return function (dispatch) {
+    return mysteriousGorgeApi.createmessage(message).then(responseMessage => {
+      dispatch(createMessageSuccess(responseMessage));
+      return responseMessage;
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+
 export function deleteMessage(message) {  
   return function(dispatch) {
     return mysteriousGorgeApi.deleteMessage(message).then(() => {
-      console.log(`Deleted ${message.id}`)
+      console.log(`Deleted ${message.id}`);
       dispatch(deleteMessageSuccess(message));
       return;
     }).catch(error => {
       throw(error);
-    })
-  }
+    });
+  };
 }
